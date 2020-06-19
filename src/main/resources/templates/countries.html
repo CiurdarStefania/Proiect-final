@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Country</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <script src="/countries.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <a href="#" class="navbar-brand">Country-Information</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Country</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Information</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="container-fluid">
+    <div class="d-flex justify-content-end mt-2">
+        <button class="btn btn-secondary" data-toggle="model" data-target="#addCountryModal">Add</button>
+    </div>
+    <table class="table table-bordered bg-dark text-white  mt-4">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Capital</th>
+            <th>Continent</th>
+            <th>Population</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="country: ${countries}">
+            <td>
+                <a class="nav-link text-dark" data-th-href="${country.id}" data-th-text="${country.name}"></a>
+            </td>
+            <td data-th-text="${country.capital}"></td>
+            <td data-th-text="${country.continent}"></td>
+            <td data-th-text="${country.population}"></td>
+            <td><i class="fas fa-trash-alt"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container-fluid" data-th-if="${details}">
+    <hr>
+    <div class="card">
+        <div class="card-header" data-th-text="${selectedCountry.name}"></div>
+        <div class="card-body">
+            <p>Capital: <span data-th-text="${selectedCountry.capital}"></span></p>
+            <p>Continent: <span data-th-text="${selectedCountry.continent}"></span></p>
+            <p>Population: <span data-th-text="${selectedCountry.population}"></span></p>
+            <img class="card-img-top" src="" alt="" style="width:100%">
+
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-secondary text-info btn-block">Information</button>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addCountryModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Country</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="modal-country-capital">Capital</label>
+                    <input type="text" id="modal-country-capital" class="form-control"/>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="modal-country-continent">Continent</label>
+                        <input class="form-control" id="modal-country-continent">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-country-population">Population</label>
+                        <input class="form-control" id="modal-country-population" >
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="modal-save-button" type="button">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="demo" class="carousel slide" data-ride="carousel">
+<ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+</ul>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="la.jpg" alt="Los Angeles" width="1100" height="500">
+        </div>
+        <div class="carousel-item">
+            <img src="chicago.jpg" alt="Chicago" width="1100" height="500">
+        </div>
+        <div class="carousel-item">
+            <img src="ny.jpg" alt="New York" width="1100" height="500">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+</body>
+</html>
