@@ -1,32 +1,35 @@
 $(document).ready(() => {
-    let editMovieId = null;
+    let editCountryId = null;
 
     $('#modal-save-button').click(() => {
-        const title = $('#modal-movie-title').val();
-        const year = $('#modal-movie-year').val();
-        const rating = $('#modal-movie-rating').val();
+        const name = $('#modal-country-name').val();
+        const capital = $('#modal-country-capital').val();
+        const continent = $('#modal-country-continent').val();
+        const population = $('#modal-country-population').val();
+
         const body = {
-            title: title,
-            year: year,
-            rating: rating
+            name: name,
+            capital: capital,
+            continent: continent,
+            population:population
         };
 
-        if (editMovieId === null) {
-            addNewMovie(body);
+        if (editCountryId === null) {
+            addNewCountry(body);
         } else {
-            editMovie(editMovieId, body);
+            editCountry(editCountryId, body);
         }
     });
 
     $('.fa-trash-alt').click(function () {
-        const movieId = this.parentElement.id;
-        fetch('/api/movies/' + movieId, {
+        const countryId = this.parentElement.id;
+        fetch('/api/countries/' + countryId, {
             method: 'delete'
         }).then(response => location.reload());
     });
 
     $('.fa-edit').click(function () {
-        editMovieId = this.parentElement.id;
+        editCountryId = this.parentElement.id;
 
         const row = this.parentElement.parentElement.parentElement;
         const name = row.children[0].innerText;
@@ -34,13 +37,14 @@ $(document).ready(() => {
         const continent = row.children[2].innerText;
         const population = row.children[3].innerText;
 
-        $('#modal-movie-title').val(title);
-        $('#modal-movie-year').val(year);
-        $('#modal-movie-rating').val(rating);
+        $('#modal-country-name').val(name);
+        $('#modal-country-capital').val(capital);
+        $('#modal-country-continent').val(continent);
+         $('#modal-country-population').val(population);
     });
 
-    function addNewMovie(body) {
-        fetch('/api/movies', {
+    function addNewCountry(body) {
+        fetch('/api/countries', {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
@@ -51,8 +55,8 @@ $(document).ready(() => {
         });
     }
 
-    function editMovie(id, body) {
-        fetch('/api/movies/' + id, {
+    function editCountry(id, body) {
+        fetch('/api/countries/' + id, {
             method: 'put',
             body: JSON.stringify(body),
             headers: {
@@ -60,7 +64,7 @@ $(document).ready(() => {
             }
         }).then(() => {
             location.reload();
-            editMovieId = null;
+            editCountryId = null;
         });
     }
 
