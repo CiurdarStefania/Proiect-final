@@ -9,11 +9,12 @@ import java.util.Objects;
 public class Country {
     @Id
     @GeneratedValue
+    private Integer id;
+
     private String name;
     private String capital;
     private String continent;
     private long population;
-    private Integer id;
 
     public Country() {
 

@@ -16,9 +16,13 @@ public class CountryUIController {
     public CountryUIController(CountryService service) {
         this.service = service;
     }
+    @GetMapping
+    public String rootPage() {
+        return "redirect:/countries";
+    }
 
     @GetMapping("countries")
-    public String getAll(Model page) {
+    public String countriesPage(Model page) {
         page.addAttribute("countries", service.getAll());
         return "countries";
     }
@@ -28,8 +32,8 @@ public class CountryUIController {
         Optional<Country> country= service.getById(id);
         if (country.isPresent()) {
             page.addAttribute("details", true);
-            page.addAttribute("selectedCountry", service.getById(id));
-            return getAll(page);
+            page.addAttribute("selectedCountry", service.getCountryOrThrow(id));
+            return countriesPage(page);
         } else {
             return "redirect:/countries";
         }
