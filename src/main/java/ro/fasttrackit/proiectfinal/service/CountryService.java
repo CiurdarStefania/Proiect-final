@@ -21,7 +21,7 @@ public class CountryService {
 
     public Country getCountryOrThrow(final Integer id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Could not find movie with id " + id));
+                .orElseThrow(() -> new RuntimeException("Could not find country with id " + id));
     }
 
     public Optional<Country> getById(final Integer id) {
